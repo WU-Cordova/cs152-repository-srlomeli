@@ -71,6 +71,17 @@ class Array2D(IArray2D[T]):
         
         py_list = [item for row in starting_sequence for item in row]
         self.__elements2d = Array(starting_sequence=py_list, data_type=self.__data_type)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Array2D):
+            return False
+        if self.__rows_len != other.__rows_len or self.__cols_len != other.__cols_len:
+            return False
+        for row in range(self.__rows_len):
+            for col in range(self.__cols_len):
+                if self[row][col] != other[row][col]:
+                    return False
+        return True
         
 
     @staticmethod
