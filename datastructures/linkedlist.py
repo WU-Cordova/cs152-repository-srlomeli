@@ -15,14 +15,34 @@ class LinkedList[T](ILinkedList[T]):
         previous: Optional[LinkedList.Node] = None
 
     def __init__(self, data_type: type = object) -> None:
-        raise NotImplementedError("LinkedList.__init__ is not implemented")
+        self.head: Optional[LinkedList.Node] = None
+        self.tail: Optional[LinkedList.Node] = None
+        self.count: int = 0
+        self.data_type = data_type
 
     @staticmethod
     def from_sequence(sequence: Sequence[T], data_type: type=object) -> LinkedList[T]:
-        raise NotImplementedError("LinkedList.from_sequence is not implemented")
+        linked_list:LinkedList[T] = LinkedList(data_type=data_type)
 
+        for item in sequence:
+            linked_list.append(item)
+        return linked_list
+    
     def append(self, item: T) -> None:
-        raise NotImplementedError("LinkedList.append is not implemented")
+        if not isinstance(item, self.data_type):
+            raise TypeError(f"Item must be of type {self.data_type.__name__}")
+
+        new_node:LinkedList.Node = LinkedList.Node(data=item)
+
+        if self.empty:
+            self.head = self.tail = new_node
+        else: 
+            if self.tail:
+                self.tail.next = new_node
+                new_node.previous = self.tail
+                self.tail = new_node
+
+        self.count += 1
 
     def prepend(self, item: T) -> None:
         raise NotImplementedError("LinkedList.prepend is not implemented")
@@ -51,15 +71,15 @@ class LinkedList[T](ILinkedList[T]):
 
     @property
     def back(self) -> T:
-        raise NotImplementedError("LinkedList.back is not implemented")
+        if not self.tail or self.count == 0:
+            raise ValueError("LinkedList is empty")
+        return self.tail.data
 
     @property
     def empty(self) -> bool:
-        raise NotImplementedError("LinkedList.empty is not implemented")
-
+        return self.head is None and self.tail is None and self.count == 0
     def __len__(self) -> int:
-        raise NotImplementedError("LinkedList.__len__ is not implemented")
-
+        return self.count
     def clear(self) -> None:
         raise NotImplementedError("LinkedList.clear is not implemented")
 
