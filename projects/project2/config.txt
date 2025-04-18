@@ -1,0 +1,9 @@
+# Number of rows and columns
+5
+5
+# Grid configuration
+X---X
+-----
+XXXXX
+--X--
+XXXXX
