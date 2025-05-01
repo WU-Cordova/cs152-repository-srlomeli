@@ -1,9 +1,8 @@
-
+from projects.project3.bistro_system import BistroSystem 
 
 def main():
     
-    print("Hello, World!")
-
+    BistroSystem().run()
 
 
 if __name__ == '__main__':
